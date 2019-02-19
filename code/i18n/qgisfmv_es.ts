@@ -120,7 +120,7 @@
         <translation>Eliminar el video seleccionado</translation>
     </message>
     <message>
-        <location filename="../player/QgsManager.py" line="177"/>
+        <location filename="../player/QgsManager.py" line="179"/>
         <source>Open video</source>
         <translation>Abrir video</translation>
     </message>
@@ -130,7 +130,7 @@
         <translation>Eliminar</translation>
     </message>
     <message>
-        <location filename="../player/QgsManager.py" line="146"/>
+        <location filename="../player/QgsManager.py" line="148"/>
         <source>This video don&apos;t have Metadata ! </source>
         <translation>Este vídeo no tiene Metadatos ! :</translation>
     </message>
@@ -140,7 +140,7 @@
         <translation>Cargando</translation>
     </message>
     <message>
-        <location filename="../player/QgsManager.py" line="161"/>
+        <location filename="../player/QgsManager.py" line="163"/>
         <source>Start location not available.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -569,42 +569,42 @@
 <context>
     <name>QgsFmvPlayer</name>
     <message>
-        <location filename="../player/QgsFmvPlayer.py" line="298"/>
+        <location filename="../player/QgsFmvPlayer.py" line="307"/>
         <source>Metadata Callback Failed! : </source>
         <translation>¡Falló la devolución de metadatos! :</translation>
     </message>
     <message>
-        <location filename="../player/QgsFmvPlayer.py" line="196"/>
+        <location filename="../player/QgsFmvPlayer.py" line="205"/>
         <source>This video doesn&apos;t have Audio ! </source>
         <translation>¡Este video no tiene audio! :</translation>
     </message>
     <message>
-        <location filename="../player/QgsFmvPlayer.py" line="204"/>
+        <location filename="../player/QgsFmvPlayer.py" line="213"/>
         <source>Audio check Failed! : </source>
         <translation>La prueba de audio Falló! :</translation>
     </message>
     <message>
-        <location filename="../player/QgsFmvPlayer.py" line="432"/>
+        <location filename="../player/QgsFmvPlayer.py" line="441"/>
         <source>Mute/Unmute</source>
         <translation>Silenciar / No silenciar</translation>
     </message>
     <message>
-        <location filename="../player/QgsFmvPlayer.py" line="438"/>
+        <location filename="../player/QgsFmvPlayer.py" line="447"/>
         <source>Extract All Frames</source>
         <translation>Extraer todos los fotogramas</translation>
     </message>
     <message>
-        <location filename="../player/QgsFmvPlayer.py" line="444"/>
+        <location filename="../player/QgsFmvPlayer.py" line="453"/>
         <source>Extract Current Frame</source>
         <translation>Extraer fotograma actual</translation>
     </message>
     <message>
-        <location filename="../player/QgsFmvPlayer.py" line="451"/>
+        <location filename="../player/QgsFmvPlayer.py" line="460"/>
         <source>Show Metadata</source>
         <translation>Mostrar metadatos</translation>
     </message>
     <message>
-        <location filename="../player/QgsFmvPlayer.py" line="811"/>
+        <location filename="../player/QgsFmvPlayer.py" line="820"/>
         <source>Open Video File : </source>
         <translation>Abrir archivo de video:</translation>
     </message>
@@ -614,66 +614,71 @@
         <translation type="obsolete">¡Archivo guardado exitosamente!</translation>
     </message>
     <message>
-        <location filename="../player/QgsFmvPlayer.py" line="796"/>
+        <location filename="../player/QgsFmvPlayer.py" line="805"/>
         <source>Playing : </source>
         <translation>Reproduciendo :</translation>
     </message>
     <message>
-        <location filename="../player/QgsFmvPlayer.py" line="1153"/>
+        <location filename="../player/QgsFmvPlayer.py" line="1201"/>
         <source>Video Information : </source>
         <translation>Información del video:</translation>
     </message>
     <message>
-        <location filename="../player/QgsFmvPlayer.py" line="245"/>
+        <location filename="../player/QgsFmvPlayer.py" line="254"/>
         <source>Metadata Buffer Failed! : </source>
         <translation>¡Error en el almacenamiento intermedio de metadatos! : 
 </translation>
     </message>
     <message>
-        <location filename="../player/QgsFmvPlayer.py" line="1108"/>
+        <location filename="../player/QgsFmvPlayer.py" line="1099"/>
         <source>Save Current Frame</source>
         <translation>Guardar fotograma actual</translation>
     </message>
     <message>
-        <location filename="../player/QgsFmvPlayer.py" line="335"/>
+        <location filename="../player/QgsFmvPlayer.py" line="344"/>
         <source>Save Json</source>
         <translation>Guardar Json</translation>
     </message>
     <message>
-        <location filename="../player/QgsFmvPlayer.py" line="832"/>
+        <location filename="../player/QgsFmvPlayer.py" line="841"/>
         <source>Save video record</source>
         <translation>Guardar grabación</translation>
     </message>
     <message>
-        <location filename="../player/QgsFmvPlayer.py" line="914"/>
+        <location filename="../player/QgsFmvPlayer.py" line="924"/>
         <source>Save Video as...</source>
         <translation>Guardar video como ...</translation>
     </message>
     <message>
-        <location filename="../player/QgsFmvPlayer.py" line="1048"/>
+        <location filename="../player/QgsFmvPlayer.py" line="1066"/>
         <source>Save all Frames</source>
         <translation>Guardar todos los fotogramas</translation>
     </message>
     <message>
-        <location filename="../player/QgsFmvPlayer.py" line="992"/>
+        <location filename="../player/QgsFmvPlayer.py" line="1002"/>
         <source>Save Audio Bitrate Plot</source>
         <translation>Guardar audio Bitrate</translation>
     </message>
     <message>
-        <location filename="../player/QgsFmvPlayer.py" line="1009"/>
+        <location filename="../player/QgsFmvPlayer.py" line="1019"/>
         <source>Save Video Bitrate Plot</source>
         <translation>Guardar video Bitrate</translation>
     </message>
     <message>
-        <location filename="../player/QgsFmvPlayer.py" line="1029"/>
+        <location filename="../player/QgsFmvPlayer.py" line="1039"/>
         <source>Completed with no exception and no result (probably manually canceled by the user)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../player/QgsFmvPlayer.py" line="1128"/>
+        <source>Save Current Georeferenced Frame</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>VideoProcessor</name>
     <message>
-        <location filename="../player/QgsFmvPlayer.py" line="56"/>
+        <location filename="../player/QgsFmvPlayer.py" line="62"/>
         <source>Error: Missing OpenCV packages</source>
         <translation>Error: Faltan paquetes OpenCV</translation>
     </message>

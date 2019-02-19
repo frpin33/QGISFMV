@@ -1,0 +1,1260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>VideoMultiplexer</class>
+ <widget class="QMainWindow" name="VideoMultiplexer">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>438</width>
+    <height>417</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="contextMenuPolicy">
+   <enum>Qt::NoContextMenu</enum>
+  </property>
+  <property name="acceptDrops">
+   <bool>true</bool>
+  </property>
+  <property name="windowTitle">
+   <string>Video Multiplexer</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="resources.qrc">
+    <normaloff>:/imgFMV/images/multiplexer.png</normaloff>:/imgFMV/images/multiplexer.png</iconset>
+  </property>
+  <property name="windowOpacity">
+   <double>1.000000000000000</double>
+  </property>
+  <property name="locale">
+   <locale language="English" country="UnitedStates"/>
+  </property>
+  <property name="animated">
+   <bool>false</bool>
+  </property>
+  <property name="dockNestingEnabled">
+   <bool>true</bool>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QLabel" name="label">
+      <property name="text">
+       <string>Input Video File (e.g video.ts)</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QWidget" name="formWidget" native="true">
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QLineEdit" name="lineEdit_2"/>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="resources.qrc">
+           <normaloff>:/imgFMV/images/opened-folder.png</normaloff>:/imgFMV/images/opened-folder.png</iconset>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="label_2">
+      <property name="text">
+       <string>Input Metadata File (e.g video_metadata.csv)</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QWidget" name="formWidget" native="true">
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <widget class="QLineEdit" name="lineEdit_3"/>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_2">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="resources.qrc">
+           <normaloff>:/imgFMV/images/opened-folder.png</normaloff>:/imgFMV/images/opened-folder.png</iconset>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="label_3">
+      <property name="text">
+       <string>Output Video File (e.g out_video.ts)</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QWidget" name="formWidget" native="true">
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <item>
+        <widget class="QLineEdit" name="lineEdit_4"/>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_3">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="resources.qrc">
+           <normaloff>:/imgFMV/images/opened-folder.png</normaloff>:/imgFMV/images/opened-folder.png</iconset>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="label_4">
+      <property name="text">
+       <string>Metadata Field Mappinf File (e.g MISB_field_mapping.csv) (Optional)</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QWidget" name="formWidget" native="true">
+      <layout class="QHBoxLayout" name="horizontalLayout_4">
+       <item>
+        <widget class="QLineEdit" name="lineEdit_5"/>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_4">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="resources.qrc">
+           <normaloff>:/imgFMV/images/opened-folder.png</normaloff>:/imgFMV/images/opened-folder.png</iconset>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QCheckBox" name="checkBox">
+      <property name="text">
+       <string>Calculate coordinates using sensor information (Optional)</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="label_5">
+      <property name="text">
+       <string>Average Elevation (meters) ( Optional)</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QWidget" name="formWidget" native="true">
+      <layout class="QHBoxLayout" name="horizontalLayout_5">
+       <item>
+        <widget class="QLineEdit" name="lineEdit"/>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_5">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="resources.qrc">
+           <normaloff>:/imgFMV/images/opened-folder.png</normaloff>:/imgFMV/images/opened-folder.png</iconset>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="pushButton_6">
+      <property name="text">
+       <string>Create MISB</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionGray">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/imgFMV/images/grayscale.png</normaloff>:/imgFMV/images/grayscale.png</iconset>
+   </property>
+   <property name="text">
+    <string>Gray Scale</string>
+   </property>
+  </action>
+  <action name="actionEdge_Detection">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Edge Detection</string>
+   </property>
+  </action>
+  <action name="actionCapture_Current_Frame">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/imgFMV/images/screenshot.png</normaloff>:/imgFMV/images/screenshot.png</iconset>
+   </property>
+   <property name="text">
+    <string>Capture Current Frame</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+Q</string>
+   </property>
+  </action>
+  <action name="actionExtract_All_Frames">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/imgFMV/images/capture_all_frames.png</normaloff>:/imgFMV/images/capture_all_frames.png</iconset>
+   </property>
+   <property name="text">
+    <string>Extract All Frames</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+A</string>
+   </property>
+  </action>
+  <action name="actionShow_Metadata">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/imgFMV/images/show-metadata.png</normaloff>:/imgFMV/images/show-metadata.png</iconset>
+   </property>
+   <property name="text">
+    <string>Show Metadata</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+M</string>
+   </property>
+  </action>
+  <action name="actionConverter_Video">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/imgFMV/images/video-converter.png</normaloff>:/imgFMV/images/video-converter.png</iconset>
+   </property>
+   <property name="text">
+    <string>Converter Video</string>
+   </property>
+  </action>
+  <action name="actionSave_Video_Info">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/imgFMV/images/save-video-info.png</normaloff>:/imgFMV/images/save-video-info.png</iconset>
+   </property>
+   <property name="text">
+    <string>Save Video Info to Json</string>
+   </property>
+  </action>
+  <action name="actionAudio">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/imgFMV/images/show-bitrate.png</normaloff>:/imgFMV/images/show-bitrate.png</iconset>
+   </property>
+   <property name="text">
+    <string>Show Audio</string>
+   </property>
+  </action>
+  <action name="actionVideo">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/imgFMV/images/show-bitrate.png</normaloff>:/imgFMV/images/show-bitrate.png</iconset>
+   </property>
+   <property name="text">
+    <string>Show Video</string>
+   </property>
+  </action>
+  <action name="actionAudio_Video">
+   <property name="text">
+    <string>Show All</string>
+   </property>
+  </action>
+  <action name="actionSave_Audio">
+   <property name="text">
+    <string>Save Audio</string>
+   </property>
+  </action>
+  <action name="actionSave_Video">
+   <property name="text">
+    <string>Save Video</string>
+   </property>
+  </action>
+  <action name="actionSave_All">
+   <property name="text">
+    <string>Save All</string>
+   </property>
+  </action>
+  <action name="actionShow_Video_Info">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/imgFMV/images/video-info.png</normaloff>:/imgFMV/images/video-info.png</iconset>
+   </property>
+   <property name="text">
+    <string>Show Video Info</string>
+   </property>
+  </action>
+  <action name="actionInvert_Color">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/imgFMV/images/invert-colors.png</normaloff>:/imgFMV/images/invert-colors.png</iconset>
+   </property>
+   <property name="text">
+    <string>Invert Color</string>
+   </property>
+  </action>
+  <action name="actionMono_Filter">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/imgFMV/images/mono.png</normaloff>:/imgFMV/images/mono.png</iconset>
+   </property>
+   <property name="text">
+    <string>Mono Filter</string>
+   </property>
+  </action>
+  <action name="actionCanny_edge_detection">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/imgFMV/images/canny.png</normaloff>:/imgFMV/images/canny.png</iconset>
+   </property>
+   <property name="text">
+    <string>Canny edge detection</string>
+   </property>
+  </action>
+  <action name="actionZoom_Rectangle">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Zoom Rectangle</string>
+   </property>
+  </action>
+  <action name="actionMagnifying_glass">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/imgFMV/images/magnifier-glass.png</normaloff>:/imgFMV/images/magnifier-glass.png</iconset>
+   </property>
+   <property name="text">
+    <string>Magnifying glass</string>
+   </property>
+  </action>
+  <action name="actionAuto_Contrast_Filter">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/imgFMV/images/automatic-contrast.png</normaloff>:/imgFMV/images/automatic-contrast.png</iconset>
+   </property>
+   <property name="text">
+    <string>Auto Contrast Filter</string>
+   </property>
+  </action>
+  <action name="actionCreate_Mosaic">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/imgFMV/images/mosaic.png</normaloff>:/imgFMV/images/mosaic.png</iconset>
+   </property>
+   <property name="text">
+    <string>Create Mosaic</string>
+   </property>
+  </action>
+  <action name="actionDraw_Pinpoint">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/imgFMV/images/draw-point.png</normaloff>:/imgFMV/images/draw-point.png</iconset>
+   </property>
+   <property name="text">
+    <string>Draw Pinpoint</string>
+   </property>
+  </action>
+  <action name="actionDraw_Line">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/imgFMV/images/draw-polyline.png</normaloff>:/imgFMV/images/draw-polyline.png</iconset>
+   </property>
+   <property name="text">
+    <string>Draw Line</string>
+   </property>
+  </action>
+  <action name="actionDraw_Polygon">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/imgFMV/images/draw-polygon.png</normaloff>:/imgFMV/images/draw-polygon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Draw Polygon</string>
+   </property>
+   <property name="iconText">
+    <string>Draw Polygon</string>
+   </property>
+   <property name="toolTip">
+    <string>Draw Polygon</string>
+   </property>
+  </action>
+  <action name="actionObject_Tracking">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/imgFMV/images/object-tracking.png</normaloff>:/imgFMV/images/object-tracking.png</iconset>
+   </property>
+   <property name="text">
+    <string>Object Tracking</string>
+   </property>
+  </action>
+  <action name="actionRuler">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/imgFMV/images/ruler.png</normaloff>:/imgFMV/images/ruler.png</iconset>
+   </property>
+   <property name="text">
+    <string>Ruler</string>
+   </property>
+  </action>
+  <action name="actionHandDraw">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/imgFMV/images/HandDraw.png</normaloff>:/imgFMV/images/HandDraw.png</iconset>
+   </property>
+   <property name="text">
+    <string>Hand Draw</string>
+   </property>
+  </action>
+  <action name="actionMirroredH">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/imgFMV/images/mirrored.png</normaloff>:/imgFMV/images/mirrored.png</iconset>
+   </property>
+   <property name="text">
+    <string>Horizontal Mirrored</string>
+   </property>
+  </action>
+  <action name="actionCensure">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/imgFMV/images/censure-pencil.png</normaloff>:/imgFMV/images/censure-pencil.png</iconset>
+   </property>
+   <property name="text">
+    <string>Censure</string>
+   </property>
+   <property name="toolTip">
+    <string>Censure</string>
+   </property>
+  </action>
+  <action name="actionRemove_Last_censured">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/imgFMV/images/censure-pencil-remove-last.png</normaloff>:/imgFMV/images/censure-pencil-remove-last.png</iconset>
+   </property>
+   <property name="text">
+    <string>Remove Last</string>
+   </property>
+  </action>
+  <action name="actionRemove_All_censured">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/imgFMV/images/censure-pencil-remove-all.png</normaloff>:/imgFMV/images/censure-pencil-remove-all.png</iconset>
+   </property>
+   <property name="text">
+    <string>Remove All</string>
+   </property>
+  </action>
+  <action name="actionDraw_Polygon_remove_last">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/imgFMV/images/draw-polygon-remove-last.png</normaloff>:/imgFMV/images/draw-polygon-remove-last.png</iconset>
+   </property>
+   <property name="text">
+    <string>Remove Last Polygon</string>
+   </property>
+   <property name="iconText">
+    <string>Draw Polygon</string>
+   </property>
+   <property name="toolTip">
+    <string>Remove Last Polygon</string>
+   </property>
+  </action>
+  <action name="actionDraw_Polygon_remove_all">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/imgFMV/images/draw-polygon-remove-all.png</normaloff>:/imgFMV/images/draw-polygon-remove-all.png</iconset>
+   </property>
+   <property name="text">
+    <string>Remove All Polygon</string>
+   </property>
+   <property name="iconText">
+    <string>Draw Polygon</string>
+   </property>
+   <property name="toolTip">
+    <string>Remove All Polygon</string>
+   </property>
+  </action>
+  <action name="actionRemove_Last_Pinpoint">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/imgFMV/images/draw-point-remove-last.png</normaloff>:/imgFMV/images/draw-point-remove-last.png</iconset>
+   </property>
+   <property name="text">
+    <string>Remove Last Pinpoint</string>
+   </property>
+   <property name="toolTip">
+    <string>Remove Last Pinpoint</string>
+   </property>
+  </action>
+  <action name="actionRemove_All_Pinpoint">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/imgFMV/images/draw-point-remove-all.png</normaloff>:/imgFMV/images/draw-point-remove-all.png</iconset>
+   </property>
+   <property name="text">
+    <string>Remove All Pinpoint</string>
+   </property>
+   <property name="toolTip">
+    <string>Remove All Pinpoint</string>
+   </property>
+  </action>
+  <action name="actionRemove_All_Line">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/imgFMV/images/draw-polyline-remove-all.png</normaloff>:/imgFMV/images/draw-polyline-remove-all.png</iconset>
+   </property>
+   <property name="text">
+    <string>Remove All</string>
+   </property>
+   <property name="toolTip">
+    <string>Remove All</string>
+   </property>
+  </action>
+  <action name="actionLast_Segment_Line">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/imgFMV/images/draw-polyline-remove-last-segment.png</normaloff>:/imgFMV/images/draw-polyline-remove-last-segment.png</iconset>
+   </property>
+   <property name="text">
+    <string>Remove Last Segment</string>
+   </property>
+   <property name="toolTip">
+    <string>Remove Last Segment</string>
+   </property>
+  </action>
+  <action name="actionRemove_Last_Line">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/imgFMV/images/draw-polyline-remove-last.png</normaloff>:/imgFMV/images/draw-polyline-remove-last.png</iconset>
+   </property>
+   <property name="text">
+    <string>Remove Last Line</string>
+   </property>
+   <property name="toolTip">
+    <string>Remove Last Line</string>
+   </property>
+  </action>
+  <action name="actionCenter_on_Platform">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/imgFMV/images/center_platform.png</normaloff>:/imgFMV/images/center_platform.png</iconset>
+   </property>
+   <property name="text">
+    <string>Center on Platform</string>
+   </property>
+  </action>
+  <action name="actionCenter_on_Footprint">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/imgFMV/images/center_footprint.png</normaloff>:/imgFMV/images/center_footprint.png</iconset>
+   </property>
+   <property name="text">
+    <string>Center on Footprint</string>
+   </property>
+  </action>
+  <action name="actionCenter_Target">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/imgFMV/images/center_target.png</normaloff>:/imgFMV/images/center_target.png</iconset>
+   </property>
+   <property name="text">
+    <string>Center on Target</string>
+   </property>
+  </action>
+  <action name="actionNDVI">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/imgFMV/images/ndvi.png</normaloff>:/imgFMV/images/ndvi.png</iconset>
+   </property>
+   <property name="text">
+    <string>NDVI</string>
+   </property>
+  </action>
+  <action name="actionCapture_Georeferenced_Frame">
+   <property name="text">
+    <string>Capture Georeferenced Frame</string>
+   </property>
+  </action>
+ </widget>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>actionGray</sender>
+   <signal>triggered(bool)</signal>
+   <receiver>VideoMultiplexer</receiver>
+   <slot>grayFilter(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>346</x>
+     <y>352</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionShow_Metadata</sender>
+   <signal>triggered()</signal>
+   <receiver>VideoMultiplexer</receiver>
+   <slot>OpenQgsFmvMetadata()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>346</x>
+     <y>287</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionExtract_All_Frames</sender>
+   <signal>triggered()</signal>
+   <receiver>VideoMultiplexer</receiver>
+   <slot>ExtractAllFrames()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>346</x>
+     <y>287</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionCapture_Current_Frame</sender>
+   <signal>triggered()</signal>
+   <receiver>VideoMultiplexer</receiver>
+   <slot>ExtractCurrentFrame()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>346</x>
+     <y>287</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionSave_Video_Info</sender>
+   <signal>triggered()</signal>
+   <receiver>VideoMultiplexer</receiver>
+   <slot>saveInfoToJson()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>305</x>
+     <y>311</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionAudio_Video</sender>
+   <signal>triggered()</signal>
+   <receiver>VideoMultiplexer</receiver>
+   <slot>CreateBitratePlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>305</x>
+     <y>311</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionAudio</sender>
+   <signal>triggered()</signal>
+   <receiver>VideoMultiplexer</receiver>
+   <slot>CreateBitratePlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>305</x>
+     <y>311</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionVideo</sender>
+   <signal>triggered()</signal>
+   <receiver>VideoMultiplexer</receiver>
+   <slot>CreateBitratePlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>305</x>
+     <y>311</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionSave_All</sender>
+   <signal>triggered()</signal>
+   <receiver>VideoMultiplexer</receiver>
+   <slot>CreateBitratePlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>305</x>
+     <y>311</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionSave_Audio</sender>
+   <signal>triggered()</signal>
+   <receiver>VideoMultiplexer</receiver>
+   <slot>CreateBitratePlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>305</x>
+     <y>311</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionSave_Video</sender>
+   <signal>triggered()</signal>
+   <receiver>VideoMultiplexer</receiver>
+   <slot>CreateBitratePlot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>305</x>
+     <y>311</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionShow_Video_Info</sender>
+   <signal>triggered()</signal>
+   <receiver>VideoMultiplexer</receiver>
+   <slot>showVideoInfo()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>305</x>
+     <y>311</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionConverter_Video</sender>
+   <signal>triggered()</signal>
+   <receiver>VideoMultiplexer</receiver>
+   <slot>convertVideo()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>305</x>
+     <y>311</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionInvert_Color</sender>
+   <signal>triggered(bool)</signal>
+   <receiver>VideoMultiplexer</receiver>
+   <slot>invertColorFilter(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>305</x>
+     <y>319</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionCanny_edge_detection</sender>
+   <signal>triggered(bool)</signal>
+   <receiver>VideoMultiplexer</receiver>
+   <slot>edgeFilter(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>305</x>
+     <y>319</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionMono_Filter</sender>
+   <signal>triggered(bool)</signal>
+   <receiver>VideoMultiplexer</receiver>
+   <slot>monoFilter(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>305</x>
+     <y>319</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionDraw_Pinpoint</sender>
+   <signal>triggered(bool)</signal>
+   <receiver>VideoMultiplexer</receiver>
+   <slot>pointDrawer(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>305</x>
+     <y>319</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionMagnifying_glass</sender>
+   <signal>triggered(bool)</signal>
+   <receiver>VideoMultiplexer</receiver>
+   <slot>magnifier(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>305</x>
+     <y>319</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionAuto_Contrast_Filter</sender>
+   <signal>triggered(bool)</signal>
+   <receiver>VideoMultiplexer</receiver>
+   <slot>autoContrastFilter(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>305</x>
+     <y>308</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionCreate_Mosaic</sender>
+   <signal>triggered(bool)</signal>
+   <receiver>VideoMultiplexer</receiver>
+   <slot>createMosaic(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>305</x>
+     <y>308</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionDraw_Line</sender>
+   <signal>triggered(bool)</signal>
+   <receiver>VideoMultiplexer</receiver>
+   <slot>lineDrawer(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>370</x>
+     <y>475</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionObject_Tracking</sender>
+   <signal>triggered(bool)</signal>
+   <receiver>VideoMultiplexer</receiver>
+   <slot>ojectTracking(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>370</x>
+     <y>339</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionDraw_Polygon</sender>
+   <signal>triggered(bool)</signal>
+   <receiver>VideoMultiplexer</receiver>
+   <slot>polygonDrawer(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>370</x>
+     <y>339</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionRuler</sender>
+   <signal>triggered(bool)</signal>
+   <receiver>VideoMultiplexer</receiver>
+   <slot>VideoRuler(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>370</x>
+     <y>339</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionHandDraw</sender>
+   <signal>triggered(bool)</signal>
+   <receiver>VideoMultiplexer</receiver>
+   <slot>VideoHandDraw(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>370</x>
+     <y>339</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionMirroredH</sender>
+   <signal>triggered(bool)</signal>
+   <receiver>VideoMultiplexer</receiver>
+   <slot>MirrorHorizontalFilter(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>373</x>
+     <y>339</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionCensure</sender>
+   <signal>triggered(bool)</signal>
+   <receiver>VideoMultiplexer</receiver>
+   <slot>VideoCensure(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>373</x>
+     <y>339</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionCenter_on_Footprint</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>VideoMultiplexer</receiver>
+   <slot>centerMapFootprint(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>373</x>
+     <y>325</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionCenter_on_Platform</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>VideoMultiplexer</receiver>
+   <slot>centerMapPlatform(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>373</x>
+     <y>325</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionCenter_Target</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>VideoMultiplexer</receiver>
+   <slot>centerMapTarget(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>373</x>
+     <y>325</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionNDVI</sender>
+   <signal>triggered(bool)</signal>
+   <receiver>VideoMultiplexer</receiver>
+   <slot>NDVIFilter(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>373</x>
+     <y>325</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionCapture_Georeferenced_Frame</sender>
+   <signal>triggered()</signal>
+   <receiver>VideoMultiplexer</receiver>
+   <slot>ExtractCurrentGeoFrame()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>373</x>
+     <y>325</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>toggleGroup(bool)</slot>
+  <slot>playClicked(bool)</slot>
+  <slot>seek(int)</slot>
+  <slot>setVolume(int)</slot>
+  <slot>setMuted()</slot>
+  <slot>stop(bool)</slot>
+  <slot>stabilizeFilter(bool)</slot>
+  <slot>edgeFilter(bool)</slot>
+  <slot>saveCurrentFrame()</slot>
+  <slot>showColorDialog()</slot>
+  <slot>StartMedia()</slot>
+  <slot>EndMedia()</slot>
+  <slot>forwardMedia()</slot>
+  <slot>rewindMedia()</slot>
+  <slot>AutoRepeat(bool)</slot>
+  <slot>OpenQgsFmvMetadata()</slot>
+  <slot>ExtractAllFrames()</slot>
+  <slot>ExtractCurrentFrame()</slot>
+  <slot>saveInfoToJson()</slot>
+  <slot>CreateBitratePlot()</slot>
+  <slot>showVideoInfo()</slot>
+  <slot>SaveVideoInfoToJson()</slot>
+  <slot>convertVideo()</slot>
+  <slot>RecordVideo(bool)</slot>
+  <slot>invertColorFilter(bool)</slot>
+  <slot>grayFilter(bool)</slot>
+  <slot>monoFilter(bool)</slot>
+  <slot>magnifier(bool)</slot>
+  <slot>zoomRect(bool)</slot>
+  <slot>autoContrastFilter(bool)</slot>
+  <slot>createMosaic(bool)</slot>
+  <slot>lineDrawer(bool)</slot>
+  <slot>polygonDrawer(bool)</slot>
+  <slot>ojectTracking(bool)</slot>
+  <slot>VideoRuler(bool)</slot>
+  <slot>MirrorHorizontalFilter(bool)</slot>
+  <slot>VideoCensure(bool)</slot>
+  <slot>removeLastCensured()</slot>
+  <slot>removeAllCensure()</slot>
+  <slot>removeLastPolygon()</slot>
+  <slot>removeAllPolygon()</slot>
+  <slot>removeLastPoint()</slot>
+  <slot>removeAllPoint()</slot>
+  <slot>removeLastLine()</slot>
+  <slot>removeLastSegmentLine()</slot>
+  <slot>removeAllLines()</slot>
+  <slot>centerMapPlatform(bool)</slot>
+  <slot>centerMapFootprint(bool)</slot>
+  <slot>centerMapTarget(bool)</slot>
+  <slot>NDVIFilter(bool)</slot>
+  <slot>ExtractCurrentGeoFrame()</slot>
+ </slots>
+</ui>
