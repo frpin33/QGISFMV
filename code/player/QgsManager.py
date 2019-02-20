@@ -10,6 +10,7 @@ from PyQt5.QtWidgets import (QDockWidget,
                              QVBoxLayout,
                              QWidget)
 from QGIS_FMV.gui.ui_FmvManager import Ui_ManagerWindow
+from QGIS_FMV.player.QgsMultiplexor import Multiplexor
 from QGIS_FMV.player.QgsFmvOpenStream import OpenStream
 from QGIS_FMV.player.QgsFmvPlayer import QgsFmvPlayer
 from QGIS_FMV.utils.QgsUtils import QgsUtils as qgsu
@@ -88,6 +89,12 @@ class FmvManager(QDockWidget, Ui_ManagerWindow):
         self.OpenStream = OpenStream(self.iface, parent=self)
         self.OpenStream.setWindowFlags(Qt.Window | Qt.WindowCloseButtonHint)
         self.OpenStream.exec_()
+        return
+
+    def openMuiltiplexorDialog(self):
+        self.Muiltiplexor = Multiplexor(self.iface, parent=self)
+        self.Muiltiplexor.setWindowFlags(Qt.Window | Qt.WindowCloseButtonHint)
+        self.Muiltiplexor.exec_()
         return
 
     def AddFileRowToManager(self, name, filename):

@@ -120,32 +120,32 @@
 <context>
     <name>ManagerDock</name>
     <message>
-        <location filename="../player/QgsManager.py" line="52"/>
+        <location filename="../player/QgsManager.py" line="53"/>
         <source>Remove the current selection&apos;s video</source>
         <translation>Remove the current selection&apos;s video</translation>
     </message>
     <message>
-        <location filename="../player/QgsManager.py" line="179"/>
+        <location filename="../player/QgsManager.py" line="186"/>
         <source>Open video</source>
         <translation>Open video</translation>
     </message>
     <message>
-        <location filename="../player/QgsManager.py" line="52"/>
+        <location filename="../player/QgsManager.py" line="53"/>
         <source>Remove</source>
         <translation>Remove</translation>
     </message>
     <message>
-        <location filename="../player/QgsManager.py" line="148"/>
+        <location filename="../player/QgsManager.py" line="155"/>
         <source>This video don&apos;t have Metadata ! </source>
         <translation type="unfinished">This video don&apos;t have Metadata ! :</translation>
     </message>
     <message>
-        <location filename="../player/QgsManager.py" line="106"/>
+        <location filename="../player/QgsManager.py" line="113"/>
         <source>Loading</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../player/QgsManager.py" line="163"/>
+        <location filename="../player/QgsManager.py" line="170"/>
         <source>Start location not available.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -163,27 +163,27 @@
         <translation>File</translation>
     </message>
     <message>
-        <location filename="../ui/ui_FmvManager.ui" line="113"/>
+        <location filename="../ui/ui_FmvManager.ui" line="115"/>
         <source>Id</source>
         <translation>Id</translation>
     </message>
     <message>
-        <location filename="../ui/ui_FmvManager.ui" line="123"/>
+        <location filename="../ui/ui_FmvManager.ui" line="125"/>
         <source>Name</source>
         <translation>Name</translation>
     </message>
     <message>
-        <location filename="../ui/ui_FmvManager.ui" line="133"/>
+        <location filename="../ui/ui_FmvManager.ui" line="135"/>
         <source>Status</source>
         <translation>Status</translation>
     </message>
     <message>
-        <location filename="../ui/ui_FmvManager.ui" line="143"/>
+        <location filename="../ui/ui_FmvManager.ui" line="145"/>
         <source>Source</source>
         <translation>Source</translation>
     </message>
     <message>
-        <location filename="../ui/ui_FmvManager.ui" line="186"/>
+        <location filename="../ui/ui_FmvManager.ui" line="188"/>
         <source>Open Stream</source>
         <translation>Open Stream</translation>
     </message>
@@ -193,18 +193,23 @@
         <translation type="obsolete">Open MPEG2 file</translation>
     </message>
     <message>
-        <location filename="../ui/ui_FmvManager.ui" line="153"/>
+        <location filename="../ui/ui_FmvManager.ui" line="155"/>
         <source>Start Location</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/ui_FmvManager.ui" line="163"/>
+        <location filename="../ui/ui_FmvManager.ui" line="165"/>
         <source>Progress</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/ui_FmvManager.ui" line="195"/>
+        <location filename="../ui/ui_FmvManager.ui" line="197"/>
         <source>Open Video File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/ui_FmvManager.ui" line="206"/>
+        <source>Create MISB File</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
