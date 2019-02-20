@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>509</width>
-    <height>550</height>
+    <width>442</width>
+    <height>399</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -136,7 +136,7 @@
    <item>
     <widget class="QLabel" name="label_5">
      <property name="text">
-      <string>Average Elevation (meters) ( Optional)</string>
+      <string>Average Elevation (meters) (Optional)</string>
      </property>
     </widget>
    </item>

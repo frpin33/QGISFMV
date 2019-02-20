@@ -11,7 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_VideoMultiplexer(object):
     def setupUi(self, VideoMultiplexer):
         VideoMultiplexer.setObjectName("VideoMultiplexer")
-        VideoMultiplexer.resize(509, 550)
+        VideoMultiplexer.resize(442, 399)
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(":/imgFMV/images/multiplexer.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         VideoMultiplexer.setWindowIcon(icon)
@@ -123,7 +123,7 @@ class Ui_VideoMultiplexer(object):
         self.label_3.setText(_translate("VideoMultiplexer", "Output Video File (e.g out_video.ts)"))
         self.label_4.setText(_translate("VideoMultiplexer", "Metadata Field Mappinf File (e.g MISB_field_mapping.csv) (Optional)"))
         self.chx_sensor.setText(_translate("VideoMultiplexer", "Calculate coordinates using sensor information (Optional)"))
-        self.label_5.setText(_translate("VideoMultiplexer", "Average Elevation (meters) ( Optional)"))
+        self.label_5.setText(_translate("VideoMultiplexer", "Average Elevation (meters) (Optional)"))
         self.bt_createMISB.setText(_translate("VideoMultiplexer", "Create MISB"))
 
 from QGIS_FMV.gui import resources_rc
