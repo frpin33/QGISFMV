@@ -115,22 +115,14 @@ class Ui_ManagerWindow(object):
         icon2.addPixmap(QtGui.QPixmap(":/imgFMV/images/misb-file.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.actionOpen_MPEG2_File.setIcon(icon2)
         self.actionOpen_MPEG2_File.setObjectName("actionOpen_MPEG2_File")
-        self.actionCreate_MISB_File = QtWidgets.QAction(ManagerWindow)
-        icon3 = QtGui.QIcon()
-        icon3.addPixmap(QtGui.QPixmap(":/imgFMV/images/multiplexer.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.actionCreate_MISB_File.setIcon(icon3)
-        self.actionCreate_MISB_File.setObjectName("actionCreate_MISB_File")
         self.menuFile.addAction(self.actionOpen_Stream)
         self.menuFile.addAction(self.actionOpen_MPEG2_File)
-        self.menuFile.addSeparator()
-        self.menuFile.addAction(self.actionCreate_MISB_File)
         self.menubarwidget.addAction(self.menuFile.menuAction())
 
         self.retranslateUi(ManagerWindow)
         self.actionOpen_Stream.triggered.connect(ManagerWindow.openStreamDialog)
         self.VManager.doubleClicked['QModelIndex'].connect(ManagerWindow.PlayVideoFromManager)
         self.actionOpen_MPEG2_File.triggered.connect(ManagerWindow.openVideoFileDialog)
-        self.actionCreate_MISB_File.triggered.connect(ManagerWindow.openMuiltiplexorDialog)
         QtCore.QMetaObject.connectSlotsByName(ManagerWindow)
 
     def retranslateUi(self, ManagerWindow):
@@ -151,6 +143,5 @@ class Ui_ManagerWindow(object):
         item.setText(_translate("ManagerWindow", "Progress"))
         self.actionOpen_Stream.setText(_translate("ManagerWindow", "Open Stream"))
         self.actionOpen_MPEG2_File.setText(_translate("ManagerWindow", "Open Video File"))
-        self.actionCreate_MISB_File.setText(_translate("ManagerWindow", "Create MISB File"))
 
 from QGIS_FMV.gui import resources_rc

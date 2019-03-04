@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
-
+from os.path import dirname, abspath
 from PyQt5.QtCore import QSettings, pyqtSlot, QEvent, Qt, QCoreApplication, QPoint
 from PyQt5.QtWidgets import (QDockWidget,
                              QTableWidgetItem,
@@ -14,7 +14,8 @@ from QGIS_FMV.player.QgsMultiplexor import Multiplexor
 from QGIS_FMV.player.QgsFmvOpenStream import OpenStream
 from QGIS_FMV.player.QgsFmvPlayer import QgsFmvPlayer
 from QGIS_FMV.utils.QgsUtils import QgsUtils as qgsu
-from QGIS_FMV.fmvConfig import DTM_file as dtm_path, Exts
+from configparser import SafeConfigParser
+
 from QGIS_FMV.utils.QgsFmvUtils import (askForFiles,
                                         BufferedMetaReader,
                                         initElevationModel,
@@ -22,12 +23,16 @@ from QGIS_FMV.utils.QgsFmvUtils import (askForFiles,
 import qgis.utils
 from QGIS_FMV.converter.ffmpeg import FFMpeg
 
+import ast
+
 try:
     from pydevd import *
 except ImportError:
     None
 
 s = QSettings()
+parser = SafeConfigParser()
+parser.read(os.path.join(dirname(dirname(abspath(__file__))), 'settings.ini'))
 
 
 class FmvManager(QDockWidget, Ui_ManagerWindow):
@@ -125,10 +130,12 @@ class FmvManager(QDockWidget, Ui_ManagerWindow):
         self.pBars[str(rowPosition)] = pbar
         self.VManager.setVisible(True)
 
-        # settrace()
-
         if not self.isStreaming:
             info = FFMpeg().probe(filename)
+            if info is None:
+                qgsu.showUserAndLogMessage(QCoreApplication.translate(
+                    "ManagerDock", "Failed loading FFMPEG ! "))
+                return
             info.format.duration
             # init non-blocking metadata buffered reader
             self.meta_reader[str(rowPosition)] = BufferedMetaReader(filename, pass_time=self.pass_time)
@@ -159,7 +166,7 @@ class FmvManager(QDockWidget, Ui_ManagerWindow):
                 return
 
             pbar.setValue(90)
-
+            dtm_path = parser['GENERAL']['DTM_file']
             if self.initialPt[str(rowPosition)] and dtm_path != '':
                 try:
                     initElevationModel(self.initialPt[str(
@@ -183,6 +190,7 @@ class FmvManager(QDockWidget, Ui_ManagerWindow):
     def openVideoFileDialog(self):
         ''' Open video file dialog '''
         self.isStreaming = False
+        Exts = ast.literal_eval(parser.get("FILES", "Exts"))
         filename, _ = askForFiles(self, QCoreApplication.translate(
             "ManagerDock", "Open video"),
             exts=Exts)
@@ -202,7 +210,7 @@ class FmvManager(QDockWidget, Ui_ManagerWindow):
             return
 
         path = self.VManager.item(model.row(), 3).text()
-        
+
         self.ToggleActiveRow(model.row())
         # temp Fix metadata update
         try:

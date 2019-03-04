@@ -2,6 +2,7 @@
 import inspect
 from math import atan, tan, sqrt, radians, pi
 import os
+from os.path import dirname, abspath
 import platform
 import json
 from datetime import datetime
@@ -13,15 +14,20 @@ from PyQt5.QtGui import QImage
 from PyQt5.QtWidgets import QFileDialog
 from QGIS_FMV.klvdata.streamparser import StreamParser
 from QGIS_FMV.klvdata.element import UnknownElement
-from QGIS_FMV.fmvConfig import (frames_g,
-                                Reverse_geocoding_url,
-                                min_buffer_size,
-                                Platform_lyr,
-                                Footprint_lyr,
-                                FrameCenter_lyr,
-                                DTM_buffer_size as dtm_buffer,
-                                ffmpeg as ffmpeg_path,
-                                ffprobe as ffprobe_path)
+from configparser import SafeConfigParser
+
+parser = SafeConfigParser()
+parser.read(os.path.join(dirname(dirname(abspath(__file__))), 'settings.ini'))
+
+frames_g = parser['LAYERS']['frames_g']
+Reverse_geocoding_url = parser['GENERAL']['Reverse_geocoding_url']
+min_buffer_size = int(parser['GENERAL']['min_buffer_size'])
+Platform_lyr = parser['LAYERS']['Platform_lyr']
+Footprint_lyr = parser['LAYERS']['Footprint_lyr']
+FrameCenter_lyr = parser['LAYERS']['FrameCenter_lyr']
+dtm_buffer = int(parser['GENERAL']['DTM_buffer_size'])
+ffmpegConf = parser['GENERAL']['ffmpeg']
+
 from QGIS_FMV.geo import sphere as sphere
 from QGIS_FMV.utils.QgsFmvLayers import (addLayerNoCrsDialog,
                                          ExpandLayer,
@@ -100,11 +106,11 @@ tLastLat = 0.0
 _settings = {}
 
 if windows:
-    ffmpeg_path = ffmpeg_path + '\\ffmpeg.exe'
-    ffprobe_path = ffprobe_path + '\\ffprobe.exe'
+    ffmpeg_path = os.path.join(ffmpegConf, 'ffmpeg.exe')
+    ffprobe_path = os.path.join(ffmpegConf, 'ffprobe.exe')
 else:
-    ffmpeg_path = ffmpeg_path + '\\ffmpeg'
-    ffprobe_path = ffprobe_path + '\\ffprobe'
+    ffmpeg_path = os.path.join(ffmpegConf, 'ffmpeg')
+    ffprobe_path = os.path.join(ffmpegConf, 'ffprobe')
 
 
 class BufferedMetaReader():
@@ -237,7 +243,6 @@ def getVideoLocationInfo(videoPath):
 
         if stdout_data == b'':
             return
-
         for packet in StreamParser(stdout_data):
             if isinstance(packet, UnknownElement):
                 qgsu.showUserAndLogMessage(
@@ -247,6 +252,7 @@ def getVideoLocationInfo(videoPath):
             frameCenterLat = packet.FrameCenterLatitude
             frameCenterLon = packet.FrameCenterLongitude
             loc = "-"
+
             if Reverse_geocoding_url != "":
                 try:
                     url = QUrl(Reverse_geocoding_url.format(
@@ -464,6 +470,13 @@ def GetSensor():
 
 
 def GetFrameCenter():
+    global sensorTrueAltitude
+    global frameCenterElevation
+    global gframeCenterLat
+    global gframeCenterLon
+    # Todo if sensor height is null, compute it from sensor altitude.
+    if(frameCenterElevation == None):
+        frameCenterElevation = sensorTrueAltitude - 500    
     return [gframeCenterLat, gframeCenterLon, frameCenterElevation]
 
 
@@ -539,7 +552,7 @@ def _spawn(cmds, t="ffmpeg"):
 
 
 def install_pip_requirements():
-    ''' Install Requeriments from pip '''
+    ''' Install Requeriments from pip >= 10.0.1'''
     package_dir = QgsApplication.qgisSettingsDirPath() + 'python/plugins/QGIS_FMV/'
     requirements_file = os.path.join(package_dir, 'requirements.txt')
     if not os.path.isfile(requirements_file):
@@ -547,8 +560,11 @@ def install_pip_requirements():
             requirements_file), "", onlyLog=True)
         raise
     try:
-        from pip._internal import main
-        main(['install', '-r', requirements_file])
+        process = Popen(["pip", "install", '-r', requirements_file],
+                        shell=True,
+                        stdout=PIPE,
+                        stderr=PIPE)
+        process.wait()
     except Exception:
         raise
     return
@@ -599,7 +615,7 @@ def initElevationModel(frameCenterLat, frameCenterLon, dtm_path):
     dtm_rowLowerBound = rIndex - dtm_buffer
     if dtm_colLowerBound < 0 or dtm_rowLowerBound < 0:
         qgsu.showUserAndLogMessage(QCoreApplication.translate(
-            "QgsFmvUtils", "There is no DTM for theses bounds. Check/increase DTM_buffer_size in fmvConfig.py"), level=QGis.Warning)
+            "QgsFmvUtils", "There is no DTM for theses bounds. Check/increase DTM_buffer_size in settings.ini"), level=QGis.Warning)
     else:
         # qgsu.showUserAndLogMessage("UpdateLayers: ", " dtm_colLowerBound:"+str(dtm_colLowerBound)+" dtm_rowLowerBound:"+str(dtm_rowLowerBound)+" dtm_buffer:"+str(dtm_buffer), onlyLog=True)
 
@@ -612,6 +628,7 @@ def initElevationModel(frameCenterLat, frameCenterLon, dtm_path):
 
 def UpdateLayers(packet, parent=None, mosaic=False):
     ''' Update Layers Values '''
+
     global frameCenterElevation, sensorLatitude, sensorLongitude, sensorTrueAltitude
 
     frameCenterLat = packet.FrameCenterLatitude
@@ -641,13 +658,11 @@ def UpdateLayers(packet, parent=None, mosaic=False):
     else:
         cornerPointUL = [packet.CornerLatitudePoint1Full,
                          packet.CornerLongitudePoint1Full]
-
         if None in cornerPointUL:
             return
 
         cornerPointUR = [packet.CornerLatitudePoint2Full,
                          packet.CornerLongitudePoint2Full]
-
         if None in cornerPointUR:
             return
 
@@ -662,7 +677,6 @@ def UpdateLayers(packet, parent=None, mosaic=False):
 
         if None in cornerPointLL:
             return
-
         UpdateFootPrintData(
             packet, cornerPointUL, cornerPointUR, cornerPointLR, cornerPointLL, hasElevationModel())
 

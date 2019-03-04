@@ -18,13 +18,16 @@ about= Plugin for QGIS which allows to analyze, visualize and process videos ins
 	   </a>
 	   <p>If this plugin is useful for you, consider to donate to the author.</p>
 
-version=1.4
+version=1.5
 author= Francisco Raga
 email=franka1986@gmail.com
 
 changelog=
     ** General **
     1.5:
+    	- Added EG0104 Parser for legacy Predator Metadataset
+    	- Auto install dependencies on windows
+    	- Change FmvConfig file (settings.ini)
     	- Fix mosaic algorithm
     	- Reimplimented algorithms
     	- Add 3D Support (Experimental)

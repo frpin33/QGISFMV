@@ -127,3 +127,11 @@ class Ui_VideoMultiplexer(object):
         self.bt_createMISB.setText(_translate("VideoMultiplexer", "Create MISB"))
 
 from QGIS_FMV.gui import resources_rc
+# -*- coding: utf-8 -*-
+
+# Form implementation generated from reading ui file 'ui\ui_FmvMultiplexer.ui'
+#
+# Created by: PyQt5 UI code generator 5.11.3
+#
+# WARNING! All changes made in this file will be lost!
+
