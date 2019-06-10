@@ -19,7 +19,7 @@ from qgis.core import (QgsApplication,
                        QgsTask,
                        QgsRasterLayer,
                        Qgis as QGis)
-from subprocess import Popen, PIPE, check_output
+from subprocess import Popen, PIPE, check_output, STDOUT
 import threading
 
 from osgeo import gdal, osr
@@ -27,6 +27,7 @@ from osgeo import gdal, osr
 from QGIS_FMV.geo import sphere
 from QGIS_FMV.klvdata.element import UnknownElement
 from QGIS_FMV.klvdata.streamparser import StreamParser
+from QGIS_FMV.klvdata.common import (bytes_to_int, bytes_to_str)
 from QGIS_FMV.utils.QgsFmvLayers import (addLayerNoCrsDialog,
                                          ExpandLayer,
                                          UpdateFootPrintData,
@@ -114,18 +115,35 @@ else:
     ffmpeg_path = os.path.join(ffmpegConf, 'ffmpeg')
     ffprobe_path = os.path.join(ffmpegConf, 'ffprobe')
 
+########################
+whereValue  = 0
+whereValuePlayer = 0
+path = "\\\\ulysse\\LIDAR\\Developpement\\Programmation\\FP\\FMV\\ffmpeg-20181206-b44a571-win64-static\\bin\\METADATA.txt"
+numberOfMetadata = 0
+listOfMetadata = []
+metadataRead = False
+lengthOfClip = 0
+#########################
+
 
 class BufferedMetaReader():
     ''' Non-Blocking metadata reader with buffer  '''
 
-    def __init__(self, video_path, pass_time=250, intervall=500):
+    def __init__(self, video_path, pass_time=250, intervall=500, dataFile=False, data_path=""):
         # don't go too low with pass_time or we won't catch any metadata at
         # all.
         # 8 x 500 = 4000ms buffer time
         # min_buffer_size x buffer_intervall = Miliseconds buffer time
+        ###########################
+        global numberOfMetadata, listOfMetadata, metadataRead, lengthOfClip
+        if metadataRead == False and dataFile == True:
+            lengthOfClip = getLengthOfMovie(video_path)
+            listOfMetadata, numberOfMetadata = readMetadataFile(data_path)
+        ###########################    
         self.video_path = video_path
         self.pass_time = pass_time
         self.intervall = intervall
+        self.dataFile = dataFile
         self._meta = {}
         self._min_buffer_size = min_buffer_size
         self._initialize('00:00:00.0000', self._min_buffer_size)
@@ -154,7 +172,7 @@ class BufferedMetaReader():
                                                                    '-to', _seconds_to_time_frac(
                                                                        nTime),
                                                                    '-map', 'data-re',
-                                                                   '-f', 'data', '-'])
+                                                                   '-f', 'data', '-'], dataFile=self.dataFile)
                 self._meta[new_key].start()
 
     def get(self, t):
@@ -186,11 +204,11 @@ class BufferedMetaReader():
                     "", "Meta reader -> get: " + t + " cache: " + new_t + " values have not been init yet.", onlyLog=True)
                 self._check_buffer(new_t)
                 value = 'BUFFERING'
-            elif self._meta[new_t].p is None:
+            elif self.dataFile == False and self._meta[new_t].p is None:
                 value = 'NOT_READY'
                 qgsu.showUserAndLogMessage(
                     "", "Meta reader -> get: " + t + " cache: " + new_t + " values not ready yet.", onlyLog=True)
-            elif self._meta[new_t].p.returncode is None:
+            elif self.dataFile == False and self._meta[new_t].p.returncode is None:
                 value = 'NOT_READY'
                 qgsu.showUserAndLogMessage(
                     "", "Meta reader -> get: " + t + " cache: " + new_t + " values not ready yet.", onlyLog=True)
@@ -214,15 +232,26 @@ class BufferedMetaReader():
 class callBackMetadataThread(threading.Thread):
     ''' CallBack metadata in other thread  '''
 
-    def __init__(self, cmds):
+    def __init__(self, cmds, dataFile):
         self.cmds = cmds
         self.p = None
+        self.dataFile = dataFile
         threading.Thread.__init__(self)
 
     def run(self):
         # qgsu.showUserAndLogMessage("", "callBackMetadataThread run: commands:" + str(self.cmds), onlyLog=True)
-        self.p = _spawn(self.cmds)
-        self.stdout, _ = self.p.communicate()
+        if self.dataFile == False :
+            self.p = _spawn(self.cmds)
+            self.stdout, _ = self.p.communicate()
+        
+        #########################
+        else : 
+            global listOfMetadata, numberOfMetadata, lengthOfClip
+            currentTime = _time_to_seconds(self.cmds[3])
+            whereVal = int(currentTime/lengthOfClip*(numberOfMetadata-1))
+            self.stdout = listOfMetadata[whereVal]
+        #########################                
+        
 
 # Add video to settings list
 def AddVideoToSettings(row_id, path):
@@ -252,18 +281,25 @@ def setCenterMode(mode, interface):
     centerMode = mode
     iface = interface
 
-def getVideoLocationInfo(videoPath):
+def getVideoLocationInfo(videoPath, dataFile=False):
     """ Get basic location info about the video """
     location = []
 
     try:
-        p = _spawn(['-i', videoPath,
-                    '-ss', '00:00:00',
-                    '-to', '00:00:01',
-                    '-map', 'data-re',
-                    '-f', 'data', '-'])
+        if dataFile == False :
+            p = _spawn(['-i', videoPath,
+                        '-ss', '00:00:00',
+                        '-to', '00:00:01',
+                        '-map', 'data-re',
+                        '-f', 'data', '-'])
 
-        stdout_data, _ = p.communicate()
+            stdout_data, _ = p.communicate()
+            
+        ################
+        else : 
+            global listOfMetadata
+            stdout_data = listOfMetadata[0]
+        ################  
 
         if stdout_data == b'':
             return
@@ -368,7 +404,7 @@ def _callerName():
     return ".".join(name)
 
 
-def askForFiles(parent, msg=None, isSave=False, allowMultiple=False, exts="*"):
+def askForFiles(parent, msg=None, isSave=False, allowMultiple=False, exts="*", textFile=False):
     ''' dialog for save or load files '''
     msg = msg or 'Select file'
     caller = _callerName().split(".")
@@ -381,6 +417,10 @@ def askForFiles(parent, msg=None, isSave=False, allowMultiple=False, exts="*"):
     extString = ";; ".join([" %s files (*.%s)" % (e.upper(), e)
                             if e != "*" else "All files (*.*)" for e in exts])
 
+    if textFile == True :
+        ret = QFileDialog.getOpenFileName(parent, msg, path, extString)
+        return ret 
+    
     if allowMultiple:
         ret = QFileDialog.getOpenFileNames(parent, msg, path, '*.' + extString)
         if ret:
@@ -1113,3 +1153,45 @@ def BurnDrawingsImage(source, overlay):
     # Restore size
     base = base.scaled(source.size(), Qt.IgnoreAspectRatio )
     return base
+    
+def getLengthOfMovie(filename):
+  result = Popen([ffprobe_path, '-i', filename], stdout=PIPE, stderr=STDOUT, stdin=PIPE)
+  result = [x for x in result.stdout.readlines() if "Duration" in x.decode()]
+  result = _time_to_seconds(((bytes_to_str(result[0])).split("Duration: ")[1]).split(",")[0])
+  return result
+
+
+def readMetadataFile(datapath):
+    numberOfMetadata = 0
+    listOfMetadata = []
+    f = open(datapath, "rb")
+    done = False
+    while done == False :
+        allData = f.read(16)
+        if (allData.find(b'\x00\x00\x06\x0e+4\x02\x0b\x01\x01\x0e\x01\x03\x01\x01') > 0):
+            allData = b'\x06\x0e+4\x02\x0b\x01\x01\x0e\x01\x03\x01\x01\x00\x00\x00'
+            length = f.read(4)
+        else:
+            length = f.read(1)
+        allData += length
+        length = bytes_to_int(length)
+        if length >= 128 :
+            length -= 128
+            length *= 128
+            secondRead = f.read(1)
+            allData += secondRead
+            secondRead = bytes_to_int(secondRead)
+            if secondRead >= 128 :
+                secondRead -= 128
+            length += secondRead
+        allData += f.read(length)
+        if allData == b"" : 
+            done = True
+        else :    
+            listOfMetadata.append(allData)
+            numberOfMetadata += 1
+    f.close()
+    global metadataRead 
+    metadataRead = True
+    return listOfMetadata, numberOfMetadata
+

@@ -11,7 +11,8 @@ from qgis.PyQt.QtWidgets import (QDockWidget,
                              QMenu,
                              QProgressBar,
                              QVBoxLayout,
-                             QWidget)
+                             QWidget,
+                             QMessageBox)
 import qgis.utils
 
 from PyQt5.QtGui import QColor
@@ -56,6 +57,7 @@ class FmvManager(QDockWidget, Ui_ManagerWindow):
         self.initialPt = {}
         self.pass_time = 250
         self.actionOpen_Stream.setVisible(False)
+        self.dataFile = False
 
         self.VManager.viewport().installEventFilter(self)
 
@@ -182,26 +184,43 @@ class FmvManager(QDockWidget, Ui_ManagerWindow):
 
             pbar.setValue(60)
             
-            try:
-                # init point we can center the video on
-                self.initialPt[str(rowPosition)
-                               ] = getVideoLocationInfo(filename)
-                if not self.initialPt[str(rowPosition)]:
+            # init point we can center the video on
+            self.initialPt[str(rowPosition)
+                            ] = getVideoLocationInfo(filename)
+            if not self.initialPt[str(rowPosition)]:
+                response = QMessageBox.question(self, "Missing Metadata", "Your video file is missing metadata \n Would you like to load a text file?", QMessageBox.Yes| QMessageBox.No, QMessageBox.Yes)
+                if response == QMessageBox.Yes :
+                    self.dataFile = True
+                    dataname = self.openMetadataFileDialog()
+                    if dataname :
+                        del self.meta_reader[str(rowPosition)]
+                        self.meta_reader[str(rowPosition)] = BufferedMetaReader(filename, pass_time=self.pass_time, dataFile=self.dataFile, data_path=dataname)
+                        self.initialPt[str(rowPosition)] = getVideoLocationInfo(dataname, dataFile=self.dataFile)
+                        if not self.initialPt[str(rowPosition)] :
+                            self.VManager.setItem(rowPosition, 4, QTableWidgetItem(
+                                QCoreApplication.translate(
+                                    "ManagerDock", "Start location not available.")))
+                            qgsu.showUserAndLogMessage(QCoreApplication.translate(
+                                "ManagerDock", "This video don't have Metadata ! "))
+                            self.ToggleActiveRow(rowPosition, value="Not MISB")
+                            pbar.setValue(99)
+                            return
+                        else : 
+                            self.VManager.setItem(rowPosition, 4, QTableWidgetItem(
+                                self.initialPt[str(rowPosition)][2]))
+
+                else :    
                     self.VManager.setItem(rowPosition, 4, QTableWidgetItem(
                         QCoreApplication.translate(
                             "ManagerDock", "Start location not available.")))
+                    qgsu.showUserAndLogMessage(QCoreApplication.translate(
+                        "ManagerDock", "This video don't have Metadata ! "))
                     self.ToggleActiveRow(rowPosition, value="Not MISB")
                     pbar.setValue(99)
                     return
-                else:
-                    self.VManager.setItem(rowPosition, 4, QTableWidgetItem(
-                        self.initialPt[str(rowPosition)][2]))
-            except Exception:
-                qgsu.showUserAndLogMessage(QCoreApplication.translate(
-                    "ManagerDock", "This video don't have Metadata ! "))
-                pbar.setValue(99)
-                self.ToggleActiveRow(rowPosition, value="Not MISB")
-                return
+            else:
+                self.VManager.setItem(rowPosition, 4, QTableWidgetItem(
+                    self.initialPt[str(rowPosition)][2]))
 
             pbar.setValue(90)
 
@@ -236,6 +255,11 @@ class FmvManager(QDockWidget, Ui_ManagerWindow):
             self.AddFileRowToManager(name, filename)
 
         return
+        
+    def openMetadataFileDialog(self):
+        '''Open metadata file dialog'''
+        dataname, _ = askForFiles(self, exts="txt", textFile=True)
+        return dataname
 
     # Manager row double clicked
     def PlayVideoFromManager(self, model):
@@ -264,7 +288,7 @@ class FmvManager(QDockWidget, Ui_ManagerWindow):
     def CreatePlayer(self, path, row):
         ''' Create Player '''
         self._PlayerDlg = QgsFmvPlayer(self.iface, path, parent=self, meta_reader=self.meta_reader[str(
-            row)], pass_time=self.pass_time, isStreaming=self.isStreaming)
+            row)], pass_time=self.pass_time, isStreaming=self.isStreaming, dataFile=self.dataFile)
         self._PlayerDlg.setWindowFlags(Qt.Window | Qt.WindowCloseButtonHint)
         self._PlayerDlg.show()
         self._PlayerDlg.activateWindow()

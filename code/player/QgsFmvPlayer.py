@@ -70,7 +70,7 @@ except Exception as e:
 class QgsFmvPlayer(QMainWindow, Ui_PlayerWindow):
     """ Video Player Class """
 
-    def __init__(self, iface, path, parent=None, meta_reader=None, pass_time=None, isStreaming=False):
+    def __init__(self, iface, path, parent=None, meta_reader=None, pass_time=None, isStreaming=False, dataFile=False):
         """ Constructor """
         super().__init__(parent)
         self.setupUi(self)
@@ -82,6 +82,7 @@ class QgsFmvPlayer(QMainWindow, Ui_PlayerWindow):
         self.createingMosaic = False
         self.currentInfo = 0.0
         self.data = None
+        self.dataFile = dataFile
         self.staticDraw = False
         self.playbackRateSlow = 0.7
 
@@ -205,6 +206,8 @@ class QgsFmvPlayer(QMainWindow, Ui_PlayerWindow):
             setCenterMode(3, self.iface)
         else:
             setCenterMode(0, self.iface)
+    
+    
             
     def MouseLocationCoordinates(self, idx):
         ''' Set Cursor Video Coordinates , WGS84/MGRS '''
@@ -304,11 +307,12 @@ class QgsFmvPlayer(QMainWindow, Ui_PlayerWindow):
                                              '-to', nextTime,
                                              '-map', 'data-re',
                                              '-preset', 'ultrafast',
-                                             '-f', 'data', '-'])
+                                             '-f', 'data', '-'], dataFile=self.dataFile)
             t.start()
             t.join(1)
             if t.is_alive():
-                t.p.terminate()
+                if self.dataFile == False :
+                    t.p.terminate()
                 t.join()
 
             if t.stdout == b'':
